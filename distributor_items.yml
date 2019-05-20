@@ -1,0 +1,53 @@
+  /items:
+    post:
+      description: If the request is successful, a 200 status code will be returned, along with a list of items. A 404 status code will be returned if the api_key is not provided, or is incorrect aka the business cannot be found by that api_key.
+      parameters:
+        - in: query
+          name: api_key
+          required: true
+          schema:
+            type: string
+            example: jgn983hy48thw9begh98h4539h4
+          description: The business's api_key.
+      responses:
+        '200':
+          description: The items request was successful.
+          content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    api_key:
+                      type: string
+                      example:
+                        data:
+                        - id: '1'
+                          type: item
+                          attributes:
+                            alc_type: Alc type 1
+                            alc_category: Alc category 1
+                            name: Item 1
+                            price: 3
+                            ounces: 6.6
+                            unit: Unit 1
+                            thumbnail: https://picsum.photos/id/755/200/200?grayscale
+                        - id: '2'
+                          type: item
+                          attributes:
+                            alc_type: Alc type 2
+                            alc_category: Alc category 2
+                            name: Item 2
+                            price: 4.5
+                            ounces: 9.9
+                            unit: Unit 2
+                            thumbnail: https://picsum.photos/id/755/200/200?grayscale
+        '404':
+          description: Unsuccessful request, the api_key with either not provided or could not be associated with an instance of a business in the database.
+          content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    error:
+                      type: string
+                      example: Couldn't find Business

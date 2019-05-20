@@ -1,4 +1,4 @@
-  /distributors/login:
+  /businesses/login:
     post:
       description: If the request is successful, a 200 status code will be returned, along with an api_key. A 404 status code will be returned if the business's email cannot be found in the database. A 401 status code will be returned if the password is incorrect.
       parameters:
