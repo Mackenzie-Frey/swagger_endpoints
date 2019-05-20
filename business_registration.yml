@@ -2,9 +2,8 @@ openapi: 3.0.0
 info:
   version: '1.0.0'
   title: 'Business Registration'
-  description: |
-    Endpoint for businesses to create an account.
-  paths:
+  description: Endpoint for businesses to create an account.
+paths:
   /businesses/register:
     post:
       description: If the request is successful, a 201 status code will be returned and a business will be created, saved to the database, and the response will include an api_key. An unsuccessful request will return a 422 error.
