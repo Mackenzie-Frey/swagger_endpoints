@@ -1,0 +1,98 @@
+openapi: 3.0.0
+info:
+  version: '1.0.0'
+  title: 'Business Registration'
+  description: |
+    Endpoint for businesses to create an account.
+  paths:
+  /businesses/register:
+    post:
+      description: If the request is successful, a 201 status code will be returned and a business will be created, saved to the database, and the response will include an api_key. An unsuccessful request will return a 422 error.
+      parameters:
+        - in: query
+          name: name
+          required: true
+          schema:
+            type: string
+            example: Mike's Bar
+          description: The business's name.
+        - in: query
+          name: email
+          required: true
+          schema:
+            type: string
+            example: inventory@mikesbar.com
+          description: The business's email.
+        - in: query
+          name: password
+          required: true
+          schema:
+            type: string
+            example: password123
+          description: The business's password.
+        - in: query
+          name: phone_number
+          required: true
+          schema:
+            type: string
+            example: 3039994444
+          description: The business's phone number.
+        - in: query
+          name: distributor_code
+          required: true
+          schema:
+            type: string
+            example: CODE1234
+          description: The business's distributor_code.
+        - in: query
+          name: address
+          required: true
+          schema:
+            type: string
+            example: 100 Main St Winter Park, CO 80482
+          description: The business's address.
+      responses:
+        '201':
+          description: The business record has been created and saved to the database.
+          content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    api_key:
+                      type: string
+                      example: a9hb9xW4-AhbiLIBW89jcw
+
+        '422':
+          description: Unprocessable Entity - The request was well formed, but was unable to be followed due to semantic errors.
+          content:
+              application/json:
+                schema:
+                  type: object
+          $ref: ''
+          examples:
+              Email Already Exists:
+                  email:
+                  - has already been taken
+              Distributor Code Is Not Included / Not Valid:
+                  distributor:
+                    - must exist
+              Password Is Not Included:
+                  password:
+                    - can't be blank
+              Address Is Not Included:
+                  address:
+                    - can't be blank
+              Phone Number Is Not Included:
+                  phone number:
+                    - can't be blank
+                    - is not a number
+              Phone Number Is Not A Number:
+                  phone number:
+                    - is not a number
+
+servers:
+  - description: Heroku Endpoint
+    url: https://barstock-backend.herokuapp.com/api/v1
+  - description: SwaggerHub API Auto Mocking
+    url: https://virtserver.swaggerhub.com/BarStock/BarStockBackEnd/1.0.0
