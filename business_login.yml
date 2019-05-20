@@ -1,0 +1,49 @@
+  /distributors/login:
+    post:
+      description: If the request is successful, a 200 status code will be returned, along with an api_key. A 404 status code will be returned if the business's email cannot be found in the database. A 401 status code will be returned if the password is incorrect.
+      parameters:
+        - in: query
+          name: email
+          required: true
+          schema:
+            type: string
+            example: my_email@example.com
+          description: The business's unique email.
+        - in: query
+          name: password
+          required: true
+          schema:
+            type: string
+            example: password123
+          description: The business's password.
+      responses:
+        '200':
+          description: The log-in request was successful.
+          content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    api_key:
+                      type: string
+                      example: a9hb9xW4-AhbiLIBW89jcw
+        '404':
+          description: Unsuccessful request, the business's email was either not provided, or could not be found in the database.
+          content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    error:
+                      type: string
+                      example: Couldn't find Business
+        '401':
+          description: Unsuccessful request, the password was either not provided, or is invalid.
+          content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    unauth:
+                      type: string
+                      example: Incorrect Password
