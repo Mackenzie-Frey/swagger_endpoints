@@ -1,5 +1,5 @@
   /items:
-    post:
+    get:
       description: If the request is successful, a 200 status code will be returned, along with a list of items. A 404 status code will be returned if the api_key is not provided, or is incorrect aka the business cannot be found by that api_key.
       parameters:
         - in: query
