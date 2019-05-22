@@ -66,6 +66,33 @@ paths:
             type: string
             example: jgn983hy48thw9begh98h4539h4
           description: The business's api_key.
+        - in: query
+          name: price_sold
+          required: true
+          schema:
+            type: number
+            example: 22
+          description: The price in dollars the business sells the item at.
+        - in: query
+          name: quantity
+          schema:
+            type: number
+            example: 7
+          description: The quantity of items to be added to inventory.
+        - in: query
+          name: serving_size
+          required: true
+          schema:
+            type: number
+            example: 1.5
+          description: The serving size the business utilizes for that item.
+        - in: query
+          name: item_id
+          required: true
+          schema:
+            type: number
+            example: 3
+          description: The id of the item being referenced.
       responses:
         '201':
           description: The POST request to create a business_item was successful.
