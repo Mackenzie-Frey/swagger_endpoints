@@ -1,0 +1,55 @@
+    post:
+      description: If the request is successful, a 201 status code will be returned, and the business item will be created in the database. A 422 error will be returned if the request is missing parameters. A 404 status code will be returned if the API key is invalid.
+      parameters:
+        - in: query
+          name: api_key
+          required: true
+          schema:
+            type: string
+            example: jgn983hy48thw9begh98h4539h4
+          description: The business's api_key.
+      responses:
+        '201':
+          description: The POST request to create a business_item was successful.
+          content:
+              application/json:
+                schema:
+                  type: object
+        '404':
+          description: Unsuccessful request, the api_key with either not provided or is invalid and could not be associated with an instance of a business in the database.
+          content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    error:
+                      type: string
+                      example: Couldn't find Business
+        '422':
+          description: Unprocessable Entity - The request was well formed, but was unable to be followed due to semantic errors.
+          content:
+              application/json:
+                schema:
+                  type: object
+          $ref: ''
+          examples:
+              Price Sold Is Not Included:
+                  price_sold:
+                  - can't be blank
+                  - is not a number
+              Price Sold Not A Valid Datatype:
+                  price_sold:
+                  - is not a number
+              Serving Size Is Not Included:
+                  serving_size:
+                  - can't be blank
+                  - is not a number
+              Serving Size Is Not A Valid Datatype:
+                  serving_size:
+                  - is not a number
+              Item ID Is Not Included:
+                  error:
+                  Couldn't find Item without an ID
+              Item ID Is Not a Valid Dataype:
+                  error:
+                  Couldn't find Item with 'id'=three"
