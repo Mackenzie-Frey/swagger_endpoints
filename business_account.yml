@@ -18,6 +18,8 @@
                   type: object
                   properties:
                     business:
+                      type: string
+                      example:
                         data:
                           id: '1'
                           type: business
@@ -34,7 +36,6 @@
                               rep_name: Andy
                               rep_email: andy@gmail.com
                               rep_phone_number: 7205038000
-
         '404':
           description: Unsuccessful request, the api_key with either not provided or is invalid and could not be associated with an instance of a business in the database.
           content:
