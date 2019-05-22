@@ -1,0 +1,47 @@
+  /businesses/account:
+    get:
+      description: If the request is successful, a 200 status code will be returned, along with the bussiness's account information, their distributor's information, and their representative's information. A 404 status code will be returned if the API key is invalid.
+      parameters:
+        - in: query
+          name: api_key
+          required: true
+          schema:
+            type: string
+            example: jgn983hy48thw9begh98h4539h4
+          description: The business's api_key.
+      responses:
+        '200':
+          description: The request for account details was successful.
+          content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    business:
+                        data:
+                          id: '1'
+                          type: business
+                          attributes:
+                            id: 1
+                            name: The Basement
+                            address: 78295 US Highway 40 Winter Park, CO
+                            email: mike@thebasement.com
+                            phone_number: 9703637280
+                            distributor:
+                              distributor_address: 8000 Southpark Terrace, Littleton, CO 80120
+                              distributor_name: RNDC
+                            representative:
+                              rep_name: Andy
+                              rep_email: andy@gmail.com
+                              rep_phone_number: 7205038000
+
+        '404':
+          description: Unsuccessful request, the api_key with either not provided or is invalid and could not be associated with an instance of a business in the database.
+          content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    error:
+                      type: string
+                      example: Couldn't find Business
