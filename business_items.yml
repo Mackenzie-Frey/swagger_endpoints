@@ -1,0 +1,52 @@
+  /business_items:
+    get:
+      description: If the request is successful, a 200 status code will be returned, along with the items the business has previously ordered. A 404 status code will be returned if the API key is invalid.
+      parameters:
+        - in: query
+          name: api_key
+          required: true
+          schema:
+            type: string
+            example: jgn983hy48thw9begh98h4539h4
+          description: The business's api_key.
+      responses:
+        '200':
+          description: The request for the business's items, aka previously ordered items, was successful.
+          content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                      data:
+                        type: string
+                        example:
+                          - id: '1'
+                            type: business_item
+                            attributes:
+                              id: 1
+                              alc_type: beer
+                              alc_category: porter
+                              thumbnail: https://products0.imgix.drizly.com/ci-boulder-beer-shake-chocolate-porter-fb43ba821fe9cf64.jpeg?auto=format%2Ccompress&fm=jpeg&q=20
+                              price_sold: 3
+                              serving_size: 1.5
+                              quantity: 5
+                          - id: '2'
+                            type: business_item
+                            attributes:
+                              id: 2
+                              alc_type: liquor
+                              alc_category: whiskey
+                              thumbnail: https://products1.imgix.drizly.com/ci-jim-beam-bourbon-whiskey-28f7c73c8e0e8223.png?auto=format%2Ccompress&fm=jpeg&q=20
+                              price_sold: 5
+                              serving_size: 1.5
+                              quantity: 2
+        '404':
+          description: Unsuccessful request, the api_key with either not provided or is invalid and could not be associated with an instance of a business in the database.
+          content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    error:
+                      type: string
+                      example: Couldn't find Business
