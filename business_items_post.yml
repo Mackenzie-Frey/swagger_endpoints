@@ -16,15 +16,19 @@
                 schema:
                   type: object
         '404':
-          description: Unsuccessful request, the api_key with either not provided or is invalid and could not be associated with an instance of a business in the database.
+          description: Unsuccessful request, the api_key with either not provided or is invalid and could not be associated with an instance of a business in the database, or the item_id is not provided, or invalid and could not be associated with an instance of an item in the database.
           content:
               application/json:
                 schema:
                   type: object
-                  properties:
-                    error:
-                      type: string
-                      example: Couldn't find Business
+          $ref: ''
+          examples:
+              Invalid or Missing API Key:
+                  error: Couldn't find Business
+              Item ID Is Not Included:
+                  error: Couldn't find Item without an ID
+              Item ID Is Not a Valid Dataype:
+                  error: Couldn't find Item with 'id'=three
         '422':
           description: Unprocessable Entity - The request was well formed, but was unable to be followed due to semantic errors.
           content:
@@ -47,9 +51,3 @@
               Serving Size Is Not A Valid Datatype:
                   serving_size:
                   - is not a number
-              Item ID Is Not Included:
-                  error:
-                  Couldn't find Item without an ID
-              Item ID Is Not a Valid Dataype:
-                  error:
-                  Couldn't find Item with 'id'=three"
