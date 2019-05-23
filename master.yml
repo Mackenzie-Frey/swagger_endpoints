@@ -423,6 +423,52 @@ paths:
                     error:
                       type: string
                       example: Couldn't find Business
+  # /orders:
+  #   post:
+  #     description: If the request is successful, a 201 status code will be returned, and the order will be created in the database. A 422 error will be returned if the request is missing parameters. A 404 status code will be returned if the API key is invalid or missing.
+  #     parameters:
+  #       - in: body
+  #         name: api_key
+  #         required: true
+  #         schema:
+  #           type: string
+  #           example: jgn983hy48thw9begh98h4539h4
+  #         description: The business's api_key.
+  #       - in: body
+  #         name: total_cost
+  #         required: true
+  #         schema:
+  #           type: number
+  #           example: 200
+  #         description: The total cost of the order.
+  #       - in: body
+  #         name: total revenue
+  #         required: true
+  #         schema:
+  #           type: number
+  #           example: 320
+  #         description: The total revenue the business expects to make from the order.
+        # in: body
+        #   name: items
+        #   required: true
+        #   schema:
+        #     type: string
+        #     example:
+        #     ---
+        #     - id: '1'
+        #       quantity: '4'
+        #       price: '5.8'
+        #     - id: '2'
+        #       quantity: '2'
+        #       price: '20'
+        #   description: The items assoicated with the order, including their item_id, quantity ordered, and price purchased at.
+      # responses:
+      #   '201':
+      #     description: The POST request to create a business_item was successful.
+      #     content:
+      #         application/json:
+      #           schema:
+      #             type: object
 
 servers:
   - description: Heroku Endpoint
