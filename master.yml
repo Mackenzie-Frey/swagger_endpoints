@@ -2,7 +2,6 @@ openapi: 3.0.0
 info:
   version: '1.0.0'
   title: 'BarStock Back-End'
-  description: Endpoint for businesses to create an account.
 paths:
   /business_items:
     get:
@@ -437,7 +436,7 @@ paths:
                       example: Couldn't find Business
   /items/{id}:
     patch:
-      description: If the request is successful, a 200 status code will be returned, and the item with the id passed into the params will be updated in the database. A 404 status code will be returned if the API key for the distributor is invalid.
+      description: Endpoint enables a distributor to update an item. If the request is successful, a 200 status code will be returned, and the item with the id passed into the params will be updated in the database. A 404 status code will be returned if the API key for the distributor is invalid.
       parameters:
         - in: path
           name: id
