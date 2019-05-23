@@ -1,0 +1,124 @@
+
+    post:
+      description: If the request is successful, a 201 status code will be returned, and the item will be created in the database. A 422 error will be returned if the request is missing parameters. A 404 status code will be returned if the API key for the distributor is invalid.
+      parameters:
+        - in: query
+          name: api_key
+          required: true
+          schema:
+            type: string
+            example: f01zdxN0RGWufApdZQxwUg
+          description: The business's api_key.
+        - in: query
+          name: name
+          required: true
+          schema:
+            type: string
+            example: Peanut Butter Porter
+          description: The name of the item.
+        - in: query
+          name: alc_type
+          schema:
+            type: string
+            example: beer
+          description: The type of item.
+        - in: query
+          name: alc_category
+          required: true
+          schema:
+            type: string
+            example: porter
+          description: The category of item (nested within the alc_type).
+        - in: query
+          name: price
+          required: true
+          schema:
+            type: number
+            example: 10
+          description: The price the distributor sells the item to the business at (in dollars).
+        - in: query
+          name: quantity
+          required: true
+          schema:
+            type: number
+            example: 24
+          description: The quantity of individual units in the item.
+        - in: query
+          name: ounces
+          required: true
+          schema:
+            type: number
+            example: 124.0
+          description: The total ounces in the item.
+        - in: query
+          name: unit
+          required: true
+          schema:
+            type: string
+            example: case
+          description: The unit type, ie case, keg.
+        - in: query
+          name: thumbnail
+          schema:
+            type: string
+            example: https://images.unsplash.com/photo-1527281400683-1aae777175f8?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80
+          description: The url of the item image.
+      responses:
+        '201':
+          description: The POST request to create an item was successful.
+          content:
+              application/json:
+                schema:
+                  type: object
+        '404':
+          description: Unsuccessful request, the api_key with either not provided or is invalid and could not be associated with an instance of a distributor in the database.
+          content:
+              application/json:
+                schema:
+                  type: object
+          $ref: ''
+          examples:
+              Invalid or Missing API Key:
+                  error: Couldn't find Distributor
+
+        '422':
+          description: Unprocessable Entity - The request was well formed, but was unable to be followed due to semantic errors.
+          content:
+              application/json:
+                schema:
+                  type: object
+          $ref: ''
+          examples:
+              Name Is Not Included:
+                  name:
+                  - can't be blank
+              Alc Type Is Not Included:
+                  alc_type:
+                  - can't be blank
+              Alc Category Is Not Included:
+                  alc_category:
+                  - can't be blank
+              Price Is Not Included:
+                  price:
+                  - can't be blank
+                  - is not a number
+              Price Is Not The Correct Datatype:
+                  price:
+                  - is not a number
+              Quantity Is Not Included:
+                  quantity:
+                  - can't be blank
+                  - is not a number
+              Quantity Is Not The Correct Datatype:
+                  quantity:
+                  - is not a number
+              Ounces Is Not Included:
+                  ounces:
+                  - can't be blank
+                  - is not a number
+              Ounces Is Not The Correct Datatype:
+                  ounces:
+                  - is not a number
+              Unit Is Not Included:
+                  unit:
+                  - can't be blank
