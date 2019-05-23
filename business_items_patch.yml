@@ -17,21 +17,18 @@
           description: The business's api_key.
         - in: query
           name: price_sold
-          required: true
           schema:
             type: number
             example: 22
           description: The price in dollars the business sells the item at.
         - in: query
           name: quantity
-          required: true
           schema:
             type: number
             example: 7
           description: The quantity of items in inventory.
         - in: query
           name: serving_size
-          required: true
           schema:
             type: number
             example: 1.5
@@ -60,21 +57,9 @@
               application/json:
                 schema:
                   type: object
-          # $ref: ''
-          # examples:
-          #     Invalid or Missing API Key:
-          #         error: Couldn't find Business
-              # Item ID Is Not Included:
-              #     error: Couldn't find Item without an ID
-              # Item ID Is Not a Valid Dataype:
-              #     error: Couldn't find Item with 'id'=three
-
-
-
-# Notes, if a field is not passed in, it is reset in the database to null
-# I currently have these set to required
-# Does the other PATCH request also do this?
-# Put screemshots on PR
-# Create bug card
-
-# Make sure the response in swagger is in alignment and does not have an array
+          $ref: ''
+          examples:
+              Invalid or Missing API Key:
+                  error: Couldn't find Business
+              The Business Item ID Provided Cannot Be Matched With A Record In The Database:
+                  error: Couldn't find BusinessItem with 'id'=33333
