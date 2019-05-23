@@ -273,7 +273,7 @@ paths:
           required: true
           schema:
             type: string
-            example: CODE1234
+            example: RNDC1234
           description: The business's distributor_code.
         - in: query
           name: address
@@ -282,6 +282,13 @@ paths:
             type: string
             example: 100 Main St Winter Park, CO 80482
           description: The business's address.
+        - in: query
+          name: rep
+          required: true
+          schema:
+            type: string
+            example: Paul
+          description: The name of the distributor's representative that the business has been paired with.
       responses:
         '201':
           description: The business record has been created and saved to the database.
@@ -400,6 +407,7 @@ paths:
                             alc_category: Alc category 1
                             name: Item 1
                             price: 3
+                            quantity: 24
                             ounces: 6.6
                             unit: Unit 1
                             thumbnail: https://picsum.photos/id/755/200/200?grayscale
@@ -410,6 +418,7 @@ paths:
                             alc_category: Alc category 2
                             name: Item 2
                             price: 4.5
+                            quantity: 12
                             ounces: 9.9
                             unit: Unit 2
                             thumbnail: https://picsum.photos/id/755/200/200?grayscale
