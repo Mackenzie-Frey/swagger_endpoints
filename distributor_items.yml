@@ -28,6 +28,7 @@
                             alc_category: Alc category 1
                             name: Item 1
                             price: 3
+                            quantity: 24
                             ounces: 6.6
                             unit: Unit 1
                             thumbnail: https://picsum.photos/id/755/200/200?grayscale
@@ -38,6 +39,7 @@
                             alc_category: Alc category 2
                             name: Item 2
                             price: 4.5
+                            quantity: 12
                             ounces: 9.9
                             unit: Unit 2
                             thumbnail: https://picsum.photos/id/755/200/200?grayscale
