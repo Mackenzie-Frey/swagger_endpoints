@@ -90,3 +90,6 @@
               Phone Number Is Not A Number:
                   phone number:
                     - is not a number
+              Representaive Is Not Included / Cannot Be Found In The Database:
+                  representative:
+                    - must exist
