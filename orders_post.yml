@@ -1,0 +1,82 @@
+  /orders:
+    post:
+      description: If the request is successful, a 201 status code will be returned, and the order will be created in the database. A 422 error will be returned if the request is missing parameters. A 404 status code will be returned if the API key is invalid or missing.
+      parameters:
+        - in: body
+          name: api_key
+          required: true
+          schema:
+            type: string
+            example: jgn983hy48thw9begh98h4539h4
+          description: The business's api_key.
+        - in: body
+          name: total_cost
+          required: true
+          schema:
+            type: number
+            example: 200
+          description: The total cost of the order.
+        - in: body
+          name: total revenue
+          required: true
+          schema:
+            type: number
+            example: 320
+          description: The total revenue the business expects to make from the order.
+        - in: body
+          name: items
+          required: true
+          schema:
+            type: string
+            example:
+            ---
+            - id: '1'
+              quantity: '4'
+              price: '5.8'
+            - id: '2'
+              quantity: '2'
+              price: '20'
+          description: The items assoicated with the order, including their item_id, quantity ordered, and price purchased at.
+      responses:
+        '201':
+          description: The POST request to create a business_item was successful.
+          content:
+              application/json:
+                schema:
+                  type: object
+        # '404':
+        #   description: Unsuccessful request, the api_key with either not provided or is invalid and could not be associated with an instance of a business in the database, or the item_id is not provided, or invalid and could not be associated with an instance of an item in the database.
+        #   content:
+        #       application/json:
+        #         schema:
+        #           type: object
+        #   $ref: ''
+        #   examples:
+        #       Invalid or Missing API Key:
+        #           error: Couldn't find Business
+        #       Item ID Is Not Included:
+        #           error: Couldn't find Item without an ID
+        #       Item ID Is Not a Valid Dataype:
+        #           error: Couldn't find Item with 'id'=three
+        # '422':
+        #   description: Unprocessable Entity - The request was well formed, but was unable to be followed due to semantic errors.
+        #   content:
+        #       application/json:
+        #         schema:
+        #           type: object
+        #   $ref: ''
+        #   examples:
+        #       Price Sold Is Not Included:
+        #           price_sold:
+        #           - can't be blank
+        #           - is not a number
+        #       Price Sold Not A Valid Datatype:
+        #           price_sold:
+        #           - is not a number
+        #       Serving Size Is Not Included:
+        #           serving_size:
+        #           - can't be blank
+        #           - is not a number
+        #       Serving Size Is Not A Valid Datatype:
+        #           serving_size:
+        #           - is not a number
