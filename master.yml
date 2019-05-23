@@ -435,6 +435,69 @@ paths:
                     error:
                       type: string
                       example: Couldn't find Business
+  /orders:
+    get:
+      description: If the request is successful, a 200 status code will be returned, along with the business's previous orders. A 404 status code will be returned if the API key is invalid.
+      parameters:
+        - in: query
+          name: api_key
+          required: true
+          schema:
+            type: string
+            example: 0yWwUm5CZ8CGR8MhT7FL9w
+          description: The business's api_key.
+      responses:
+        '200':
+          description: The request for the business's previous orders was successful.
+          content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                      data:
+                        type: string
+                        example:
+                          - id: '1'
+                            type: order
+                            attributes:
+                              id: 1
+                              total_cost: 200
+                              total_revenue: 380
+                              items:
+                                - id: 1
+                                  distributor_id: 1
+                                  name: Fireball
+                                  alc_type: liquor
+                                  alc_category: whiskey
+                                  price: 18.78
+                                  ounces: 33.8
+                                  unit: handle
+                                  thumbnail: https://products2.imgix.drizly.com/ci-fireball-cinnamon-whisky-355ddd0b8b3a2c55.png?auto=format%2Ccompress&fm=jpeg&q=20
+                                  quantity: 100
+                                  created_at: 2019-05-23T02:41:42.625Z
+                                  updated_at: 2019-05-23T02:41:42.625Z
+                                - id: 2
+                                  distributor_id: 1
+                                  name: Jim Bean
+                                  alc_type: liquor
+                                  alc_category: whiskey
+                                  price: 16.99
+                                  ounces: 25.3
+                                  unit: handle
+                                  thumbnail: https://products2.imgix.drizly.com/ci-fireball-cinnamon-whisky-355ddd0b8b3a2c55.png?auto=format%2Ccompress&fm=jpeg&q=20
+                                  quantity: 100
+                                  created_at: 2019-05-23T02:41:42.625Z
+                                  updated_at: 2019-05-23T02:41:42.625Z
+        '404':
+          description: Unsuccessful request, the api_key with either not provided or is invalid and could not be associated with an instance of a business in the database.
+          content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    error:
+                      type: string
+                      example: Couldn't find Business
 
     post:
       description: If the request is successful, a 201 status code will be returned, and the item will be created in the database. A 422 error will be returned if the request is missing parameters. A 404 status code will be returned if the API key for the distributor is invalid.
