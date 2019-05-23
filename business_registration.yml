@@ -1,9 +1,3 @@
-openapi: 3.0.0
-info:
-  version: '1.0.0'
-  title: 'Business Registration'
-  description: Endpoint for businesses to create an account.
-paths:
   /businesses/register:
     post:
       description: If the request is successful, a 201 status code will be returned and a business will be created, saved to the database, and the response will include an api_key. An unsuccessful request will return a 422 error.
@@ -41,7 +35,7 @@ paths:
           required: true
           schema:
             type: string
-            example: CODE1234
+            example: RNDC1234
           description: The business's distributor_code.
         - in: query
           name: address
@@ -50,6 +44,13 @@ paths:
             type: string
             example: 100 Main St Winter Park, CO 80482
           description: The business's address.
+        - in: query
+          name: rep
+          required: true
+          schema:
+            type: string
+            example: Paul
+          description: The name of the distributor's representative that the business has been paired with.
       responses:
         '201':
           description: The business record has been created and saved to the database.
@@ -89,9 +90,3 @@ paths:
               Phone Number Is Not A Number:
                   phone number:
                     - is not a number
-
-servers:
-  - description: Heroku Endpoint
-    url: https://barstock-backend.herokuapp.com/api/v1
-  - description: SwaggerHub API Auto Mocking
-    url: https://virtserver.swaggerhub.com/BarStock/BarStockBackEnd/1.0.0
