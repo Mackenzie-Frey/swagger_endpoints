@@ -1,0 +1,80 @@
+    patch:
+      description: If the request is successful, a 200 status code will be returned, and the business item, with the id provided, will be updated in the database. A 404 status code will be returned if the API key is invalid.
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+            example: 2
+          description: Numeric ID of the business_item to be updated.
+        - in: query
+          name: api_key
+          required: true
+          schema:
+            type: string
+            example: 0yWwUm5CZ8CGR8MhT7FL9w
+          description: The business's api_key.
+        - in: query
+          name: price_sold
+          required: true
+          schema:
+            type: number
+            example: 22
+          description: The price in dollars the business sells the item at.
+        - in: query
+          name: quantity
+          required: true
+          schema:
+            type: number
+            example: 7
+          description: The quantity of items in inventory.
+        - in: query
+          name: serving_size
+          required: true
+          schema:
+            type: number
+            example: 1.5
+          description: The serving size the business utilizes for that item.
+      responses:
+        '200':
+          description: The PATCH request to update a business_item was successful.
+          content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                      data:
+                        type: string
+                        example:
+                            id: '1'
+                            type: business_item
+                            attributes:
+                              id: 1
+                              price_sold: 3
+                              serving_size: 1.5
+                              quantity: 5
+        '404':
+          description: Unsuccessful request, the api_key with either not provided or is invalid and could not be associated with an instance of a business in the database, or the business_item_id is not provided, or is invalid and could not be associated with an instance of a business_item in the database.
+          content:
+              application/json:
+                schema:
+                  type: object
+          # $ref: ''
+          # examples:
+          #     Invalid or Missing API Key:
+          #         error: Couldn't find Business
+              # Item ID Is Not Included:
+              #     error: Couldn't find Item without an ID
+              # Item ID Is Not a Valid Dataype:
+              #     error: Couldn't find Item with 'id'=three
+
+
+
+# Notes, if a field is not passed in, it is reset in the database to null
+# I currently have these set to required
+# Does the other PATCH request also do this?
+# Put screemshots on PR
+# Create bug card
+
+# Make sure the response in swagger is in alignment and does not have an array
