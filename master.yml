@@ -328,6 +328,9 @@ paths:
               Phone Number Is Not A Number:
                   phone number:
                     - is not a number
+              Representaive Is Not Included / Cannot Be Found In The Database:
+                  representative:
+                    - must exist
   /distributors/login:
     post:
       description: If the request is successful, a 200 status code will be returned, along with an api_key. A 404 status code will be returned if the distibutor's name cannot be found in the database. A 401 status code will be returned if the password is incorrect.
