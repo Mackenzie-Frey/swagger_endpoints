@@ -435,6 +435,104 @@ paths:
                     error:
                       type: string
                       example: Couldn't find Business
+  /items/{id}:
+    patch:
+      description: If the request is successful, a 200 status code will be returned, and the item with the id passed into the params will be updated in the database. A 404 status code will be returned if the API key for the distributor is invalid.
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+            example: 2
+          description: Numeric ID of the item to be updated.
+        - in: query
+          name: api_key
+          schema:
+            type: string
+            example: f01zdxN0RGWufApdZQxwUg
+          description: The business's api_key.
+        - in: query
+          name: name
+          schema:
+            type: string
+            example: Peanut Butter Porter
+          description: The name of the item.
+        - in: query
+          name: alc_type
+          schema:
+            type: string
+            example: beer
+          description: The type of item.
+        - in: query
+          name: alc_category
+          schema:
+            type: string
+            example: porter
+          description: The category of item (nested within the alc_type).
+        - in: query
+          name: price
+          schema:
+            type: number
+            example: 10
+          description: The price the distributor sells the item to the business at (in dollars).
+        - in: query
+          name: quantity
+          schema:
+            type: number
+            example: 24
+          description: The quantity of individual units in the item.
+        - in: query
+          name: ounces
+          schema:
+            type: number
+            example: 124.0
+          description: The total ounces in the item.
+        - in: query
+          name: unit
+          schema:
+            type: string
+            example: case
+          description: The unit type, ie case, keg.
+        - in: query
+          name: thumbnail
+          schema:
+            type: string
+            example: https://images.unsplash.com/photo-1527281400683-1aae777175f8?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80
+          description: The url of the item image.
+      responses:
+        '200':
+          description: The PATCH request to create an item was successful.
+          content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    data:
+                      type: object
+                      example:
+                        id: "1"
+                        type: "item"
+                        attributes:
+                          alc_type: liquor
+                          alc_category: tequilla
+                          name: Jose Cuervo
+                          price: 0
+                          quantity: 1
+                          ounces: 18
+                          unit: handle
+                          thumbnail: https://cdn.shopify.com/s/files/1/0013/2477/7569/products/jc_espgold_1080x.jpg?v=1542754443
+        '404':
+          description: Unsuccessful request, the api_key with either not provided or is invalid and could not be associated with an instance of a distributor in the database.
+          content:
+              application/json:
+                schema:
+                  type: object
+          $ref: ''
+          examples:
+              Invalid or Missing API Key:
+                  error: Couldn't find Distributor
+
   /orders:
     get:
       description: If the request is successful, a 200 status code will be returned, along with the business's previous orders. A 404 status code will be returned if the API key is invalid.
